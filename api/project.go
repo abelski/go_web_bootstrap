@@ -7,7 +7,7 @@ import (
 
 type Project struct {
 	ID   string `json:"id,omitempty"`
-	Name string `json:"firstname,omitempty"`
+	Name string `json:"Name,omitempty"`
 }
 
 func GetProjectsEndpoint(w http.ResponseWriter, req *http.Request) {
