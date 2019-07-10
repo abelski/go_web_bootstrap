@@ -1,4 +1,4 @@
-package authTools
+package authtools
 
 import (
 	"fmt"
@@ -29,7 +29,6 @@ func TokenCheckMiddleware(next http.Handler) http.Handler {
 		cookie, _ := r.Cookie(authCookieName)
 		//todo чекнуть куку с токеном
 		if cookie != nil {
-			fmt.Println("coockie" + cookie.Name)
 			next.ServeHTTP(w, r)
 		} else {
 			http.Error(w, "Unauthorized.", 401)
@@ -54,6 +53,7 @@ func HandleCalback(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	expiration := time.Now().Add(time.Hour)
-	cookie := http.Cookie{Name: authCookieName, Value: token.AccessToken, Expires: expiration, Domain: ""}
+	cookie := http.Cookie{Name: authCookieName, Value: token.AccessToken, Expires: expiration, Domain: "", Path: "/"}
 	http.SetCookie(w, &cookie)
+	r.AddCookie(&cookie)
 }

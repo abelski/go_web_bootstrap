@@ -13,8 +13,6 @@ import (
 func main() {
 	router := mux.NewRouter()
 
-	// router.HandleFunc("/api/projects", project.GetProjectsEndpoint).Methods("GET")
-
 	router.HandleFunc("/web/login", utils.HandleLogin).Methods("GET")
 	router.HandleFunc("/web/callback", utils.HandleCalback).Methods("GET")
 
