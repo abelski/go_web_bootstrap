@@ -8,14 +8,15 @@ import (
 	"strings"
 )
 
-type Project struct {
+type ProjectModel struct {
 	ID   string `json:"id,omitempty"`
 	Name string `json:"Name,omitempty"`
 }
 
+//GetProjectsEndpoint - return existing projects
 func GetProjectsEndpoint(w http.ResponseWriter, req *http.Request) {
 
-	var result []Project
+	var result []ProjectModel
 
 	files, err := ioutil.ReadDir("./data")
 	if err != nil {
@@ -23,7 +24,7 @@ func GetProjectsEndpoint(w http.ResponseWriter, req *http.Request) {
 	}
 
 	for _, f := range files {
-		var pr Project
+		var pr ProjectModel
 		pr.ID = f.Name()
 		pr.Name = strings.TrimSuffix(f.Name(), ".xml")
 		result = append(result, pr)

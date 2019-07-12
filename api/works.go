@@ -2,31 +2,27 @@ package api
 
 import (
 	"encoding/json"
-	"fmt"
+	"encoding/xml"
 	"io/ioutil"
-	"log"
 	"net/http"
-	"strings"
 
-	xj "github.com/basgys/goxml2json"
 	"github.com/gorilla/mux"
 )
 
+//GetWork return converted datafile
 func GetWork(w http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
 	projectID := params["projectid"]
+	b, err := ioutil.ReadFile("./data/" + projectID) // just pass the file name
+	check(err)
+	var project Project
+	xml.Unmarshal(b, &project)
+	check(err)
+	json.NewEncoder(w).Encode(project)
+}
 
-	data, err := ioutil.ReadFile("./data/" + projectID)
-	if err != nil {
-		fmt.Println("Can't read file:", projectID)
-		panic(err)
+func check(e error) {
+	if e != nil {
+		panic(e)
 	}
-	xml := strings.NewReader(string(data))
-
-	result, err := xj.Convert(xml)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	json.NewEncoder(w).Encode(result)
 }
