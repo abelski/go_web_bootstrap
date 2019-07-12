@@ -1,0 +1,15 @@
+{
+  "presets": ["stage-2", "env"],
+  "plugins": [
+    "jsx-v-model",
+    "jsx-vue-functional",
+    "transform-vue-jsx"
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        "babel-plugin-dynamic-import-node"
+      ]
+    }
+  }
+}

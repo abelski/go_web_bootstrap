@@ -1,0 +1,10 @@
+{
+    "rules": {
+        "object-shorthand": "off",
+        "no-restricted-syntax": "off"
+    },
+    "env": {
+        "browser": false,
+        "node": true
+    }
+}

@@ -1,0 +1,268 @@
+{
+  "extends": [
+    "airbnb",
+    "plugin:vue/recommended"
+  ],
+  "plugins": ["vue", "disable"],
+  "env": {
+    "browser": true,
+    "jquery": true
+  },
+  "globals": {
+    "config": true,
+    "window": true,
+    "document": true
+  },
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "parser": "babel-eslint",
+    "ecmaVersion": 8,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "comma-dangle": [
+      "warn",
+      "always-multiline"
+    ],
+    "curly": ["error", "all"],
+    "indent": ["warn", 2, {
+      "SwitchCase": 1
+    }],
+    "linebreak-style": "off",
+    "max-len": ["warn", 120],
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "no-underscore-dangle": ["error", {
+      "allow": ["_setOptions", "_create", "_super", "__svg__", "_events"],
+      "allowAfterThis": true
+    }],
+    "no-param-reassign": ["error", { "props": false }],
+    "object-shorthand": "off",
+    "no-plusplus": "off",
+    "func-names": ["error", "never"],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          ".storybook/**",
+          "**/*.stories.js",
+          "**/*.stories.*.js",
+          "**/*.spec.js",
+          "**/test-helper.js"
+        ]
+      }
+    ],
+    "vars-on-top": ["error"],
+    "jsx-a11y/no-static-element-interactions": ["off"],
+    "newline-before-return": ["warn"],
+    "newline-after-var": [
+      "warn"
+    ],
+    "no-restricted-globals": ["warn"],
+    "function-paren-newline": ["off"],
+    "prefer-destructuring": [
+      "warn",
+      {
+        "object": true,
+        "array": false
+      }
+    ],
+    "no-unused-vars": [
+      "warn"
+    ],
+    "prefer-promise-reject-errors": ["off"],
+    "object-curly-newline": ["off"],
+    "no-trailing-spaces": ["warn"],
+    "camelcase": ["warn"],
+    "no-multi-spaces": ["warn"],
+    "semi-style": ["warn"],
+    "react/react-in-jsx-scope": ["off"],
+    "react/prop-types": ["off"],
+    "react/jsx-filename-extension": ["error", {
+      "extensions": [
+        ".js",
+        ".jsx",
+        ".vue"
+      ]
+    }],
+    "react/no-unknown-property": ["off"],
+    "react/jsx-boolean-value": ["warn"],
+    "vue/html-closing-bracket-spacing": ["warn",
+      {
+        "startTag": "never",
+        "endTag": "never",
+        "selfClosingTag": "always"
+      }
+    ],
+    "vue/this-in-template": ["warn"],
+    "vue/html-closing-bracket-newline": [
+      "warn",
+      {
+        "singleline": "never",
+        "multiline": "always"
+      }
+    ],
+    "vue/max-attributes-per-line": ["warn",
+      {
+        "singleline": 1,
+        "multiline": {
+          "max": 1,
+          "allowFirstLine": false
+        }
+      }
+    ],
+    "vue/no-side-effects-in-computed-properties": ["warn"],
+    "vue/mustache-interpolation-spacing": [
+      "warn",
+      "always"
+    ],
+    "vue/require-v-for-key": ["warn"],
+    "vue/return-in-computed-property": ["warn"],
+    "vue/html-self-closing": [
+      "warn",
+      {
+        "html": {
+          "void": "always",
+          "normal": "never",
+          "component": "always"
+        },
+        "svg": "never",
+        "math": "never"
+      }
+    ],
+    "vue/require-prop-types": ["warn"],
+    "vue/attributes-order": ["warn", { "order": [
+        "DEFINITION",
+        "CONDITIONALS",
+        "LIST_RENDERING",
+        "RENDER_MODIFIERS",
+        "BINDING",
+        "CONTENT",
+        "GLOBAL",
+        "UNIQUE",
+        "OTHER_ATTR",
+        "EVENTS"
+      ]
+    }],
+    "vue/order-in-components": [
+    "warn",
+    {
+      "order": [
+        "el",
+        "name",
+        "parent",
+        "functional",
+        [
+          "delimiters",
+          "comments"
+        ],
+        [
+          "components",
+          "directives",
+          "filters"
+        ],
+        "extends",
+        "mixins",
+        "inheritAttrs",
+        "model",
+        [
+          "props",
+          "propsData"
+        ],
+        "data",
+        "computed",
+        "LIFECYCLE_HOOKS",
+        "methods",
+        "watch",
+        [
+          "template",
+          "render"
+        ],
+        "renderError"
+      ]
+    }],
+    "vue/attribute-hyphenation": [
+      "warn",
+      "never"
+    ],
+    "vue/require-default-prop": ["warn"],
+    "vue/html-indent": [
+      "warn", 2,
+      {
+        "attribute": 1,
+        "closeBracket": 0,
+        "alignAttributesVertically": false,
+        "ignores": []
+      }
+    ],
+    "vue/require-valid-default-prop": ["warn"],
+    "vue/valid-v-for": [1],
+    "vue/no-unused-vars": ["off"],
+    "vue/valid-template-root": [1],
+    "vue/v-bind-style": [1],
+    "vue/v-on-style": [1],
+    "vue/html-quotes": [1],
+    "vue/no-multi-spaces": [1],
+    "vue/no-dupe-keys": [1],
+    "vue/no-confusing-v-for-v-if": [1],
+    "vue/valid-v-on": [1],
+    "vue/no-async-in-computed-properties": [1],
+    "vue/no-parsing-error": [1],
+    "no-mixed-spaces-and-tabs": [1],
+    "no-tabs": [1],
+    "import/extensions": [1],
+    "import/no-unresolved": [2],
+    "import/named": [2],
+    "no-multiple-empty-lines": [1],
+    "jsx-a11y/click-events-have-key-events": [1],
+    "jsx-a11y/anchor-is-valid": [1],
+    "react/no-string-refs": [
+      "off"
+    ],
+    "operator-linebreak": [
+      "warn",
+      "after",
+      {
+        "overrides": {
+          "?": "before",
+          ":": "before",
+          "||": "before",
+          "&&": "before"
+        }
+      }
+    ]
+  },
+  "overrides": {
+    "files": [
+      "*.vue"
+    ],
+    "rules": {
+      "indent": "off",
+      "vue/script-indent": [
+        "off",
+        2,
+        {
+          "baseIndent": 1
+        }
+      ],
+      "react/no-string-refs": ["off"],
+      "react/no-unknown-property": ["off"]
+    }
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "./webpack/webpack.config.js"
+      }
+    },
+    "eslint-plugin-disable": {
+      "paths": {
+        "react": [
+          "*"
+        ]
+      }
+    }
+  }
+}
