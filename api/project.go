@@ -1,4 +1,4 @@
-package project
+package api
 
 import (
 	"encoding/json"
@@ -23,10 +23,10 @@ func GetProjectsEndpoint(w http.ResponseWriter, req *http.Request) {
 	}
 
 	for _, f := range files {
-		var project Project
-		project.ID = f.Name()
-		project.Name = strings.TrimSuffix(f.Name(), ".xml")
-		result = append(result, project)
+		var pr Project
+		pr.ID = f.Name()
+		pr.Name = strings.TrimSuffix(f.Name(), ".xml")
+		result = append(result, pr)
 
 	}
 

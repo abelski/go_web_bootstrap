@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	project "github.com/abelski/go_web_bootstrap/api"
+	api "github.com/abelski/go_web_bootstrap/api"
 	utils "github.com/abelski/go_web_bootstrap/utils"
 
 	"github.com/gorilla/mux"
@@ -21,7 +21,8 @@ func main() {
 
 	apisubrouter := router.PathPrefix("/api").Subrouter()
 	apisubrouter.Use(utils.TokenCheckMiddleware)
-	apisubrouter.HandleFunc("/projects", project.GetProjectsEndpoint).Methods("GET")
+	apisubrouter.HandleFunc("/projects", api.GetProjectsEndpoint).Methods("GET")
+	apisubrouter.HandleFunc("/work/{projectid}", api.GetWork).Methods("GET")
 
 	http.Handle("/", router)
 
