@@ -2,7 +2,10 @@ package project
 
 import (
 	"encoding/json"
+	"io/ioutil"
+	"log"
 	"net/http"
+	"strings"
 )
 
 type Project struct {
@@ -11,12 +14,21 @@ type Project struct {
 }
 
 func GetProjectsEndpoint(w http.ResponseWriter, req *http.Request) {
-	var result []Project
-	var project Project
-	project.ID = "ID"
-	project.Name = "Name"
 
-	result = append(result, project, project)
+	var result []Project
+
+	files, err := ioutil.ReadDir("./data")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for _, f := range files {
+		var project Project
+		project.ID = f.Name()
+		project.Name = strings.TrimSuffix(f.Name(), ".xml")
+		result = append(result, project)
+
+	}
 
 	json.NewEncoder(w).Encode(result)
 }
