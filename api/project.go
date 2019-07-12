@@ -8,6 +8,7 @@ import (
 	"strings"
 )
 
+//ProjectModel dto for filelist
 type ProjectModel struct {
 	ID   string `json:"id,omitempty"`
 	Name string `json:"Name,omitempty"`
