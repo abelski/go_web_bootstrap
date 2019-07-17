@@ -1,5 +1,5 @@
-const prodConfig = require('./configs/webpack.prod');
-const devConfig = require('./configs/webpack.dev');
+const prodConfig = require('./config/webpack.prod');
+const devConfig = require('./config/webpack.dev');
 
 switch (process.env.NODE_ENV) {
   case 'prod':

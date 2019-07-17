@@ -9,7 +9,7 @@ module.exports = (sourceMap, isProd) => ({
       sourceMap,
       minimize: isProd,
       alias: {
-        images: dir.resolve(dir.dist.base, dir.dist.images),
+        images: dir.resolve(dir.static.base, dir.static.images),
       },
       importLoaders: 2,
     },

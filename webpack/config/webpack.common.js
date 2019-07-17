@@ -5,15 +5,23 @@ const DefinePlugin = require('webpack/lib/DefinePlugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HappyPack = require('happypack');
 
+const dir = require('../settings/filePaths');
+const lessLoaderSettings = require('../settings/lessLoader');
+
 
 const outputPath = path.resolve(__dirname, './static');
 
-module.exports = ({ env, isDevserver = false, isWatching = false }) => {
-  const isDeveloping = isDevserver || isWatching;
-  const isProd = env === 'production';
-  const sourceMap = !isProd;
+module.exports = (options) => {
+  const sourceMap = !(options.env === 'prod');
+  const extractLess = new ExtractTextPlugin({
+    filename: '[name]',
+    allChunks: true,
+  });
 
   return {
+    optimization: {
+      namedModules: true
+    },
     entry: {
       app: [
         path.resolve(__dirname, '../src/main.js')
@@ -47,7 +55,7 @@ module.exports = ({ env, isDevserver = false, isWatching = false }) => {
               options: {
                 sourceMap,
                 url: false,
-                minimize: isProd,
+                minimize: options.env === 'prod',
               },
             }, {
               loader: 'webfonts-loader',
@@ -56,18 +64,18 @@ module.exports = ({ env, isDevserver = false, isWatching = false }) => {
         }, {
           test: /\.less$/,
           exclude: /node_modules/,
-          use: isDevserver ? [
+          use: [
             'cache-loader',
             'style-loader',
-            ...lessLoaderSettings(sourceMap, isProd).use,
-          ] : extractLess.extract(lessLoaderSettings(sourceMap, isProd)),
+            ...lessLoaderSettings(sourceMap, options.env === 'prod').use,
+          ],
         }, {
           test: /\.(eot|svg|ttf|woff|woff2)$/,
           exclude: /\\icons/,
           use: [{
             loader: 'file-loader',
             options: {
-              name: `${dir.dist.fonts}[name].[ext]`,
+              name: `${dir.static.fonts}[name].[ext]`,
             },
           }],
         }, {
@@ -75,7 +83,7 @@ module.exports = ({ env, isDevserver = false, isWatching = false }) => {
           use: [{
             loader: 'file-loader',
             options: {
-              name: `${dir.dist.images}[name].[ext]`,
+              name: `${dir.static.images}[name].[ext]`,
             },
           }],
         }, {
@@ -85,12 +93,15 @@ module.exports = ({ env, isDevserver = false, isWatching = false }) => {
       ],
     },
     plugins: [
+      new webpack.ProvidePlugin({
+        jQuery: 'jquery',
+        $: 'jquery',
+      }),
       new HtmlWebpackPlugin({
         template: path.join(__dirname, '../app/assets/index.html'),
         filename: 'index.html',
         path: outputPath
       }),
-      new webpack.NamedModulesPlugin(),
       new DefinePlugin({
         ENV: JSON.stringify(options.env),
         'process.env': {
@@ -119,5 +130,13 @@ module.exports = ({ env, isDevserver = false, isWatching = false }) => {
         }],
       }),
     ],
+    devServer: {
+    contentBase: path.resolve(__dirname, './static/'),
+      port: 8080,
+      historyApiFallback: true,
+      inline: true,
+      hot: true,
+      host: 'localhost'
+  }
   };
 };

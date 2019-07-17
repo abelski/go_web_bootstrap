@@ -8,9 +8,10 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = function (options) {
   const ENV = options.env;
   return webpackMerge(commonConfig({ env: ENV }), {
+    mode: 'development',
     devtool: 'cheap-module-eval-source-map',
     plugins: [
-      new CleanWebpackPlugin(['dist']),
+      new CleanWebpackPlugin(['static']),
       new webpack.HotModuleReplacementPlugin()
     ]
   });
