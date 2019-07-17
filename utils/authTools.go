@@ -40,20 +40,24 @@ func HandleLogin(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, url, http.StatusTemporaryRedirect)
 }
 
+func HandleLogout(w http.ResponseWriter, r *http.Request) {
+	http.Redirect(w, r, "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout", http.StatusTemporaryRedirect)
+
+}
+
 func HandleCalback(w http.ResponseWriter, r *http.Request) {
 	if r.FormValue("state") != randomState {
 		fmt.Println("not valid state")
-		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 		return
 	}
 	token, err := googleOauthConfig.Exchange(oauth2.NoContext, r.FormValue("code"))
 	if err != nil {
 		fmt.Errorf("could not get token:%s", err.Error())
-		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 		return
 	}
 	expiration := time.Now().Add(time.Hour)
 	cookie := http.Cookie{Name: authCookieName, Value: token.AccessToken, Expires: expiration, Domain: "", Path: "/"}
 	http.SetCookie(w, &cookie)
 	r.AddCookie(&cookie)
+	http.Redirect(w, r, "/static/main.html", http.StatusTemporaryRedirect)
 }

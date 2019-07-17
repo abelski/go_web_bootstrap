@@ -14,6 +14,7 @@ func main() {
 	router := mux.NewRouter()
 
 	router.HandleFunc("/web/login", utils.HandleLogin).Methods("GET")
+	router.HandleFunc("/web/logout", utils.HandleLogout).Methods("GET")
 	router.HandleFunc("/web/callback", utils.HandleCalback).Methods("GET")
 
 	s := http.StripPrefix("/static/", http.FileServer(http.Dir("./static/")))
