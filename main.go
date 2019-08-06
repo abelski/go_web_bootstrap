@@ -24,6 +24,7 @@ func main() {
 	apisubrouter.Use(utils.TokenCheckMiddleware)
 	apisubrouter.HandleFunc("/projects", api.GetProjectsEndpoint).Methods("GET")
 	apisubrouter.HandleFunc("/work/{projectid}", api.GetWork).Methods("GET")
+	apisubrouter.HandleFunc("/work/{projectid}/{workid}", api.UpdateWork).Methods("GET")
 
 	http.Handle("/", router)
 
