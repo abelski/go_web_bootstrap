@@ -7,11 +7,11 @@ import 'popper.js'
 import JQuery from 'jquery'
 import './assets/less/style.less'
 
-window.$ = window.JQuery = JQuery
+window.$ = window.JQuery = JQuery;
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 new Vue({
   router,
   render: h => h(App)
-}).$mount('#app')
+}).$mount('#app');
