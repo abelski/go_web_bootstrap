@@ -59,5 +59,5 @@ func HandleCalback(w http.ResponseWriter, r *http.Request) {
 	cookie := http.Cookie{Name: authCookieName, Value: token.AccessToken, Expires: expiration, Domain: "", Path: "/"}
 	http.SetCookie(w, &cookie)
 	r.AddCookie(&cookie)
-	http.Redirect(w, r, "/static/main.html", http.StatusTemporaryRedirect)
+	http.Redirect(w, r, "/dist/index.html", http.StatusTemporaryRedirect)
 }

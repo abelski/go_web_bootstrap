@@ -17,8 +17,8 @@ func main() {
 	router.HandleFunc("/web/logout", utils.HandleLogout).Methods("GET")
 	router.HandleFunc("/web/callback", utils.HandleCalback).Methods("GET")
 
-	s := http.StripPrefix("/static/", http.FileServer(http.Dir("./static/")))
-	router.PathPrefix("/static/").Handler(s)
+	s := http.StripPrefix("/dist/", http.FileServer(http.Dir("./dist/")))
+	router.PathPrefix("/dist/").Handler(s)
 
 	apisubrouter := router.PathPrefix("/api").Subrouter()
 	apisubrouter.Use(utils.TokenCheckMiddleware)
