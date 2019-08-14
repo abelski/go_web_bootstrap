@@ -25,7 +25,7 @@ func UpdateWork(w http.ResponseWriter, req *http.Request) {
 	bytes, _ := xml.Marshal(project)
 	// b, err := ioutil.ReadFile()
 	ioutil.WriteFile("./data/"+projectID+"1", []byte(bytes), 0644)
-
+	handleCrossO(&w)
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("ok"))
 }
@@ -39,6 +39,7 @@ func GetWork(w http.ResponseWriter, req *http.Request) {
 	var project Project
 	xml.Unmarshal(b, &project)
 	check(err)
+	handleCrossO(&w)
 	json.NewEncoder(w).Encode(project)
 }
 
